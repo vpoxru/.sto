@@ -1,0 +1,39 @@
+version: 1
+
+# Stormkit configuration for a pure static site.
+# Docs: https://www.stormkit.io/docs/configuration
+
+name: stormkit-static-site
+
+build:
+  # For a static site with no build step, set commands to an empty array.
+  commands: []
+  outputDirectory: .
+
+# Define environments. You can promote from preview to production in the UI.
+environments:
+  - name: production
+    domain: auto
+    cache:
+      # Cache static assets aggressively. Index can be shorter to allow quick content updates.
+      rules:
+        - path: "**/*.css"
+          ttl: 31536000
+        - path: "**/*.js"
+          ttl: 31536000
+        - path: "**/*.png"
+          ttl: 31536000
+        - path: "**/*.jpg"
+          ttl: 31536000
+        - path: "**/*.svg"
+          ttl: 31536000
+        - path: "**/*.ico"
+          ttl: 31536000
+        - path: "index.html"
+          ttl: 300
+  - name: preview
+    domain: auto
+    cache:
+      rules:
+        - path: "**/*"
+          ttl: 300
